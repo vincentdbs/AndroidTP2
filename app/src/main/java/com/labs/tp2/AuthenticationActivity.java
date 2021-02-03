@@ -3,6 +3,7 @@ package com.labs.tp2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 
@@ -42,6 +43,8 @@ public class AuthenticationActivity extends AppCompatActivity {
             //Replace http by https
             url = new URL("https://httpbin.org/basic-auth/bob/sympa");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            String basicAuth = "Basic " + Base64.encodeToString("bob:sympa".getBytes(), Base64.NO_WRAP);
+            urlConnection.setRequestProperty ("Authorization", basicAuth);
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = readStream(in);
