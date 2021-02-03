@@ -10,5 +10,8 @@ public class FlickApp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flick_app);
+
+        //Exercise 12
+        //The JSON file start with jsonFlickrFeed(...)
     }
 }
