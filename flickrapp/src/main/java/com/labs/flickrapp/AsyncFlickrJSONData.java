@@ -1,8 +1,8 @@
 package com.labs.flickrapp;
 
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,14 +11,20 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
-    private static String LOG_ASYNC = "ASYNC";
+    private static String LOG_ASYNC = "AsyncFlickrJSONData";
+    private ImageView imageView;
 
-    protected void onProgressUpdate() {
+    public AsyncFlickrJSONData(ImageView img) {
+        imageView = img;
+    }
+
+    protected void onProgressUpdate(ImageView imageView) {
 
     }
 
@@ -29,6 +35,10 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
             JSONObject firstImage = arrayOfImage.getJSONObject(0);
             String url = firstImage.getJSONObject("media").getString("m");
             Log.i(LOG_ASYNC, url);
+
+            new AsyncBitmapDownloader(imageView).execute(url);
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

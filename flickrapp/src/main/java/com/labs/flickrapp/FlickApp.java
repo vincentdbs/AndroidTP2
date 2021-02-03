@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class FlickApp extends AppCompatActivity {
     private Button btnGetImage;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class FlickApp extends AppCompatActivity {
             JSONObject : Result of the execution
          */
 
+        image = findViewById(R.id.image);
         btnGetImage = findViewById(R.id.btn_getImage);
         btnGetImage.setOnClickListener(new GetImageOnClickListener());
     }
@@ -31,11 +34,10 @@ public class FlickApp extends AppCompatActivity {
         private String url;
 
         public GetImageOnClickListener() {
-
         }
 
         @Override public void onClick(View v) {
-            new AsyncFlickrJSONData().execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
+             new AsyncFlickrJSONData(image).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
         }
 
     }
