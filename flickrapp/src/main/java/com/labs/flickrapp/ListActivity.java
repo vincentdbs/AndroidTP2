@@ -14,7 +14,8 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         myList = (ListView)findViewById(R.id.list);
-        MyAdapter adapter = new MyAdapter();
+        MyAdapter adapter = new MyAdapter(this);
+        myList.setAdapter(adapter);
 
         new AsyncFlickrJSONDataForList(adapter).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
     }
