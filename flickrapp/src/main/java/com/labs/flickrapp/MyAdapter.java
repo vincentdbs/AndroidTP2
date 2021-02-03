@@ -33,7 +33,7 @@ public class MyAdapter extends BaseAdapter {
         return null;
     }
 
-    private void add(String url){
+    public void add(String url){
         urls.add(url);
     }
 }
