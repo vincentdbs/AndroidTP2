@@ -2,13 +2,16 @@ package com.labs.flickrapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.List;
+
 public class FlickApp extends AppCompatActivity {
-    private Button btnGetImage;
+    private Button btnGetImage, btnListActivity;
     private ImageView image;
 
     @Override
@@ -28,6 +31,13 @@ public class FlickApp extends AppCompatActivity {
         image = findViewById(R.id.image);
         btnGetImage = findViewById(R.id.btn_getImage);
         btnGetImage.setOnClickListener(new GetImageOnClickListener());
+
+        btnListActivity = findViewById(R.id.btn_toListActivity);
+        btnListActivity.setOnClickListener(v -> {
+            Intent listActivity = new Intent(this, ListActivity.class);
+            startActivity(listActivity);
+        });
+
     }
 
     public class GetImageOnClickListener implements View.OnClickListener {
