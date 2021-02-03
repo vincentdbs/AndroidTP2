@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +24,15 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject result) {
-        Log.i(LOG_ASYNC, result.toString());
+        try {
+            JSONArray arrayOfImage = result.getJSONArray("items");
+            JSONObject firstImage = arrayOfImage.getJSONObject(0);
+            String url = firstImage.getJSONObject("media").getString("m");
+            Log.i(LOG_ASYNC, url);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -37,9 +46,10 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = utils.readStream(in);
-                s = s.replace("jsonFlickrFeed", "");
-                s = s.replace("(", "");
-                s = s.replace(")", "");
+                //Remove the beginning of the file
+                s = s.replace("jsonFlickrFeed(", "");
+                //Remove the last character
+                s = s.substring(0, s.length() - 1);
 
                 Log.i(LOG_ASYNC, s);
 
