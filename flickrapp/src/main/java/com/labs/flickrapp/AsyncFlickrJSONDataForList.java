@@ -63,7 +63,7 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObje
                 //Remove the last character
                 s = s.substring(0, s.length() - 1);
 
-                Log.i(LOG_ASYNC, s);
+//                Log.i(LOG_ASYNC, s);
 
                 //Get the authenticated value
                 JSONObject result = new JSONObject(s);
