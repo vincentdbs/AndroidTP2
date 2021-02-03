@@ -4,7 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.Vector;
+
 public class MyAdapter extends BaseAdapter {
+    private Vector<String> urls;
+
+    public MyAdapter() {
+        urls = new Vector<>();
+    }
 
     @Override
     public int getCount() {
@@ -24,5 +31,9 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         return null;
+    }
+
+    private void add(String url){
+        urls.add(url);
     }
 }
