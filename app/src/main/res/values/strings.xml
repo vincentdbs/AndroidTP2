@@ -3,4 +3,5 @@
     <string name="tb_login">Login</string>
     <string name="tb_password">Password</string>
     <string name="btn_authenticate">Authenticate</string>
+    <string name="tv_result">Result</string>
 </resources>

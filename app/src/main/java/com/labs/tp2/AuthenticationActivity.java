@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ import java.net.URL;
 public class AuthenticationActivity extends AppCompatActivity {
     private Button btnAuthenticate;
     private EditText tbLogin, tbPassword;
+    private TextView tvResult;
     private final String LOG_AUTHENTICATE = "AUTHENTICATE_ACTIVITY";
 
     @Override
@@ -31,6 +33,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         btnAuthenticate = findViewById(R.id.btn_authenticate);
         tbLogin = findViewById(R.id.tb_login);
         tbPassword = findViewById(R.id.tb_password);
+        tvResult = findViewById(R.id.tv_result);
 
         btnAuthenticate.setOnClickListener(v -> {
             new Thread(() -> {
@@ -55,6 +58,13 @@ public class AuthenticationActivity extends AppCompatActivity {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = readStream(in);
                 Log.i(LOG_AUTHENTICATE, s);
+                //Add runOnUiThread so that the change is executed in the main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvResult.setText("My result is here");
+                    }
+                });
             } finally {
                 urlConnection.disconnect();
             }
