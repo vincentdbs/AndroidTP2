@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -19,6 +20,7 @@ import java.net.URL;
 
 public class AuthenticationActivity extends AppCompatActivity {
     private Button btnAuthenticate;
+    private EditText tbLogin, tbPassword;
     private final String LOG_AUTHENTICATE = "AUTHENTICATE_ACTIVITY";
 
     @Override
@@ -27,23 +29,27 @@ public class AuthenticationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_authentication);
 
         btnAuthenticate = findViewById(R.id.btn_authenticate);
+        tbLogin = findViewById(R.id.tb_login);
+        tbPassword = findViewById(R.id.tb_password);
 
         btnAuthenticate.setOnClickListener(v -> {
             new Thread(() -> {
                 //Do the request in a thread because otherwise, the call block the main thread
-                httpRequest();
+                //Pass in parameter the content of the editText
+                httpRequest(tbLogin.getText().toString(), tbPassword.getText().toString());
             }).start();
         });
 
     }
 
-    private void httpRequest(){
+    private void httpRequest(String login, String password){
         URL url = null;
         try {
             //Replace http by https
             url = new URL("https://httpbin.org/basic-auth/bob/sympa");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            String basicAuth = "Basic " + Base64.encodeToString("bob:sympa".getBytes(), Base64.NO_WRAP);
+            //Add the login and password to the request
+            String basicAuth = "Basic " + Base64.encodeToString((login + ":" + password).getBytes(), Base64.NO_WRAP);
             urlConnection.setRequestProperty ("Authorization", basicAuth);
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
