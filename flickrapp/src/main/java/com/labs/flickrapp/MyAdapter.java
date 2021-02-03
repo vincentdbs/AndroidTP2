@@ -37,6 +37,7 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         Log.i("AsyncFlickrJSONData", "TODO");
+        /*
         // inflate the layout for each list row
         if (convertView == null) {
             convertView = LayoutInflater.from(context).
@@ -48,6 +49,13 @@ public class MyAdapter extends BaseAdapter {
 
         //sets the text for item name and item description from the current item object
         textViewItemName.setText( urls.get(i));
+        */
+
+        // inflate the layout for each list row
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).
+                    inflate(R.layout.bitmaplayout, viewGroup, false);
+        }
 
         // returns the view for the current row
         return convertView;
