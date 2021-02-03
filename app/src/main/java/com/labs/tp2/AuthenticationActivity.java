@@ -40,7 +40,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         URL url = null;
         try {
             //Replace http by https
-            url = new URL("https://www.android.com/");
+            url = new URL("https://httpbin.org/basic-auth/bob/sympa");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
