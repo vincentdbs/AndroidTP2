@@ -21,4 +21,6 @@ public class utils {
             return "";
         }
     }
+
+    static String LOG_TAG = "TP2_LOG";
 }
