@@ -23,6 +23,7 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
     private ListView myList;
+    private MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,8 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         myList = (ListView) findViewById(R.id.list);
-        MyAdapter adapter = new MyAdapter(this);
+        adapter = new MyAdapter(this);
         myList.setAdapter(adapter);
-
-//        new AsyncFlickrJSONDataForList(adapter).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
 
     }
 
@@ -47,10 +46,6 @@ public class ListActivity extends AppCompatActivity {
     private void getLocation() {
         // Fournisseurs de service
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        List<String> fournisseurs = manager.getAllProviders();
-//        for (String f : fournisseurs)
-//            Toast.makeText(getApplicationContext(), "" + f,
-//                    Toast.LENGTH_SHORT).show();
 
         // Récupération de la localisation
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -60,8 +55,22 @@ public class ListActivity extends AppCompatActivity {
             Log.i(utils.LOG_TAG, "GPS Enable");
             Location localisation = manager.getLastKnownLocation("network");
             if(localisation != null){
-                Log.i(utils.LOG_TAG, "Lattitude " + localisation.getLatitude());
-                Log.i(utils.LOG_TAG, "Longitute " + localisation.getLongitude());
+                double lon = localisation.getLongitude();
+                double lat = localisation.getLatitude();
+
+
+                Log.i(utils.LOG_TAG, "Lattitude " + lon);
+                Log.i(utils.LOG_TAG, "Longitute " + lat);
+
+                String url = "https://api.flickr.com/services/rest/?" +
+                        "method=flickr.photos.search" +
+                        "&license=4" +
+                        "&api_key=553e52034e811e083aeb700ab9d86f99" +
+                        "&has_geo=1&lat=" + lat +
+                        "&lon=" + lon + "&per_page=1&format=json";
+
+                new AsyncFlickrJSONDataForList(adapter).execute(url);
+
             }
 
         }

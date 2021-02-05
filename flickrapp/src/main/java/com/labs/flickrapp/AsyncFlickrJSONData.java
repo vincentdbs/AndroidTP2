@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
-    private static String LOG_ASYNC = "AsyncFlickrJSONData";
     private ImageView imageView;
 
     public AsyncFlickrJSONData(ImageView img) {
@@ -34,7 +33,7 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
             JSONArray arrayOfImage = result.getJSONArray("items");
             JSONObject firstImage = arrayOfImage.getJSONObject(0);
             String url = firstImage.getJSONObject("media").getString("m");
-            Log.i(LOG_ASYNC, url);
+            Log.i(utils.LOG_TAG, url);
 
             new AsyncBitmapDownloader(imageView).execute(url);
 
@@ -61,7 +60,7 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
                 //Remove the last character
                 s = s.substring(0, s.length() - 1);
 
-                Log.i(LOG_ASYNC, s);
+                Log.i(utils.LOG_TAG, s);
 
                 //Get the authenticated value
                 JSONObject result = new JSONObject(s);
@@ -72,9 +71,9 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
                 urlConnection.disconnect();
             }
         } catch (MalformedURLException e) {
-            Log.i(LOG_ASYNC, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         } catch (IOException e) {
-            Log.i(LOG_ASYNC, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         }
         return null;
     }

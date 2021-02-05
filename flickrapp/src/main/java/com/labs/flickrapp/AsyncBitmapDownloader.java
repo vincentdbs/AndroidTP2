@@ -19,7 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
-    private static String LOG_ASYNC = "AsyncBitmapDownloader";
     private final WeakReference<ImageView> imageViewReference;
 
     public AsyncBitmapDownloader(ImageView imageView) {
@@ -60,9 +59,9 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
                 urlConnection.disconnect();
             }
         } catch (MalformedURLException e) {
-            Log.i(LOG_ASYNC, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         } catch (IOException e) {
-            Log.i(LOG_ASYNC, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         }
         return null;
     }

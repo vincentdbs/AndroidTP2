@@ -26,7 +26,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     private Button btnAuthenticate;
     private EditText tbLogin, tbPassword;
     private TextView tvResult;
-    private final String LOG_AUTHENTICATE = "AUTHENTICATE_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = readStream(in);
-                Log.i(LOG_AUTHENTICATE, s);
+                Log.i(utils.LOG_TAG, s);
 
                 //Get the authenticated value
                 JSONObject result = new JSONObject(s);
@@ -79,9 +78,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                 urlConnection.disconnect();
             }
         } catch (MalformedURLException e) {
-            Log.i(LOG_AUTHENTICATE, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         } catch (IOException e) {
-            Log.i(LOG_AUTHENTICATE, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
         }
     }
 
@@ -95,7 +94,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
             return total.toString();
         } catch (IOException e) {
-            Log.i(LOG_AUTHENTICATE, e.toString());
+            Log.i(utils.LOG_TAG, e.toString());
             return "";
         }
     }
