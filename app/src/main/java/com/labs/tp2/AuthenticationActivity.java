@@ -32,19 +32,18 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
+        //Get UI element by ID
         btnAuthenticate = findViewById(R.id.btn_authenticate);
         tbLogin = findViewById(R.id.tb_login);
         tbPassword = findViewById(R.id.tb_password);
         tvResult = findViewById(R.id.tv_result);
 
-        btnAuthenticate.setOnClickListener(v -> {
-            new Thread(() -> {
-                //Do the request in a thread because otherwise, the call block the main thread
-                //Pass in parameter the content of the editText
-                httpRequest(tbLogin.getText().toString(), tbPassword.getText().toString());
-            }).start();
-        });
-
+        //Add onClick listener on btn
+        btnAuthenticate.setOnClickListener(v -> new Thread(() -> {
+            //Do the request in a thread because otherwise, the call block the main thread
+            //Pass in parameter the content of the editText
+            httpRequest(tbLogin.getText().toString(), tbPassword.getText().toString());
+        }).start());
     }
 
     private void httpRequest(String login, String password){
@@ -59,6 +58,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             urlConnection.setRequestProperty ("Authorization", basicAuth);
 
             try {
+                //Get the http response
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = readStream(in);
                 Log.i(utils.LOG_TAG, s);
@@ -71,7 +71,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                 runOnUiThread(
                     new OneShotTask(authenticated)
                 );
-
             } catch (JSONException e) {
                 e.printStackTrace();
             } finally {
@@ -84,7 +83,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }
 
-    //ReadStream is a function that the developer need to implement
+    //ReadStream is a function that the developer needs to implement
     private String readStream(InputStream is) {
         try {
             BufferedReader r = new BufferedReader(new InputStreamReader(is));

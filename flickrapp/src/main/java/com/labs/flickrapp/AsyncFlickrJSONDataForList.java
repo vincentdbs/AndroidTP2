@@ -42,6 +42,7 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObje
             JSONArray arrayOfImage = result.getJSONObject("photos").getJSONArray("photo");
 
             for (int i = 0; i < arrayOfImage.length() ; i++) {
+                //Build the request
                 String id = arrayOfImage.getJSONObject(i).getString("id");
                 String server = arrayOfImage.getJSONObject(i).getString("server");
                 String secret = arrayOfImage.getJSONObject(i).getString("secret");
@@ -83,8 +84,7 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObje
                 Log.i(utils.LOG_TAG, "ResultJSON after \n" + s);
 
                 //Get the authenticated value
-                JSONObject result = new JSONObject(s);
-                return result;
+                return new JSONObject(s);
             } catch (JSONException e) {
                 e.printStackTrace();
             } finally {

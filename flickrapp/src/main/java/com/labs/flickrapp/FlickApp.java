@@ -41,8 +41,6 @@ public class FlickApp extends AppCompatActivity {
     }
 
     public class GetImageOnClickListener implements View.OnClickListener {
-        private String url;
-
         public GetImageOnClickListener() {
         }
 

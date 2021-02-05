@@ -50,8 +50,7 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
 
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                Bitmap bm = BitmapFactory.decodeStream(in);
-                return bm;
+                return BitmapFactory.decodeStream(in);
             }catch (Exception e){
                 e.printStackTrace();
             }

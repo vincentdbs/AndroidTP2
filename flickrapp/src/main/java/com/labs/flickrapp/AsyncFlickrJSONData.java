@@ -37,7 +37,6 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
 
             new AsyncBitmapDownloader(imageView).execute(url);
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -63,8 +62,7 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
                 Log.i(utils.LOG_TAG, s);
 
                 //Get the authenticated value
-                JSONObject result = new JSONObject(s);
-                return result;
+                return new JSONObject(s);
             } catch (JSONException e) {
                 e.printStackTrace();
             } finally {

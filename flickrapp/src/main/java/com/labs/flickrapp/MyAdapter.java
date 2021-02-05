@@ -44,6 +44,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+        // ------- VERSION with the text layout
         /*
         // inflate the layout for each list row
         if (convertView == null) {
@@ -58,10 +59,10 @@ public class MyAdapter extends BaseAdapter {
         textViewItemName.setText( urls.get(i));
         */
 
+        // ------- VERSION with the image layout
         // inflate the layout for each list row
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).
-                    inflate(R.layout.bitmaplayout, viewGroup, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.bitmaplayout, viewGroup, false);
         }
 
         // get the TextView for item name and item description
@@ -71,11 +72,13 @@ public class MyAdapter extends BaseAdapter {
         ImageRequest imageRequest = new ImageRequest (urls.get(i), new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
+                //Set the image
                 imageView.setImageBitmap(response);
             }
         },0,0, ImageView.ScaleType.CENTER_CROP,null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                //Display error message
                 Toast.makeText(context,"Some Thing Goes Wrong", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }

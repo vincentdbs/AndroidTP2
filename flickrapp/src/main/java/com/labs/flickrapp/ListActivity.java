@@ -33,7 +33,6 @@ public class ListActivity extends AppCompatActivity {
         myList = (ListView) findViewById(R.id.list);
         adapter = new MyAdapter(this);
         myList.setAdapter(adapter);
-
     }
 
     @Override
@@ -44,20 +43,21 @@ public class ListActivity extends AppCompatActivity {
 
 
     private void getLocation() {
-        // Fournisseurs de service
+        // Service supplier
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Récupération de la localisation
+        // Check if permission are granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             enableLocationSettings();
             Log.i(utils.LOG_TAG, "GPS Disabled");
         }else{
             Log.i(utils.LOG_TAG, "GPS Enable");
-            Location localisation = manager.getLastKnownLocation("network");
+            Location localisation = manager.getLastKnownLocation("gps");
+
+            //If we get an localisation => do the request
             if(localisation != null){
                 double lon = localisation.getLongitude();
                 double lat = localisation.getLatitude();
-
 
                 Log.i(utils.LOG_TAG, "Lattitude " + lon);
                 Log.i(utils.LOG_TAG, "Longitute " + lat);
@@ -70,15 +70,13 @@ public class ListActivity extends AppCompatActivity {
                         "&lon=" + lon + "&per_page=1&format=json";
 
                 new AsyncFlickrJSONDataForList(adapter).execute(url);
-
             }
-
         }
     }
 
+    //Ask the user to authorise the app to access localization
     private void enableLocationSettings() {
         Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(settingsIntent);
     }
-
 }
