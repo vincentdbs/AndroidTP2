@@ -1,4 +1,4 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,18 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageRequest;
-
-import java.util.List;
+import com.labs.flickrapp.utils.MyAdapter;
+import com.labs.flickrapp.R;
+import com.labs.flickrapp.async.AsyncFlickrJSONDataForList;
+import com.labs.flickrapp.utils.utils;
 
 public class ListActivity extends AppCompatActivity {
     private ListView myList;

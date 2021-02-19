@@ -1,4 +1,4 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.utils;
 
 import android.util.Log;
 
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class utils {
     //ReadStream is a function that the developer need to implement
-    static String readStream(InputStream is) {
+    public static String readStream(InputStream is) {
         try {
             BufferedReader r = new BufferedReader(new InputStreamReader(is));
             StringBuilder total = new StringBuilder();
@@ -22,5 +22,5 @@ public class utils {
         }
     }
 
-    static String LOG_TAG = "TP2_LOG";
+    public static String LOG_TAG = "TP2_LOG";
 }

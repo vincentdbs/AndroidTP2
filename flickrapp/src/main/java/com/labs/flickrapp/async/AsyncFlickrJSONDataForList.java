@@ -1,8 +1,10 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.async;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ImageView;
+
+import com.labs.flickrapp.utils.MyAdapter;
+import com.labs.flickrapp.utils.utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

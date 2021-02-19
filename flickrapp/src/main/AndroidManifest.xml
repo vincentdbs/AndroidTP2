@@ -15,8 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TP2">
-        <activity android:name=".ListActivity"></activity>
-        <activity android:name=".FlickApp">
+        <activity android:name=".activity.ListActivity"></activity>
+        <activity android:name=".activity.FlickApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

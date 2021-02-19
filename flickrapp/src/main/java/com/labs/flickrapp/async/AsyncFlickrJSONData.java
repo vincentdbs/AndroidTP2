@@ -1,8 +1,10 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.async;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.labs.flickrapp.utils.utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +13,6 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;

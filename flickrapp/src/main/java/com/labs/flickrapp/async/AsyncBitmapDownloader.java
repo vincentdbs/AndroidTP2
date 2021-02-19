@@ -1,4 +1,4 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.labs.flickrapp.utils.utils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

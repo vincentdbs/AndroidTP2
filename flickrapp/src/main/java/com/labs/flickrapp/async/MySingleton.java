@@ -1,4 +1,4 @@
-package com.labs.flickrapp;
+package com.labs.flickrapp.async;
 
 import android.content.Context;
 import android.graphics.Bitmap;
